@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  app-server:
+    build: .cloud/docker
+    image: app-test
+    depends_on:
+      - redis
+    volumes:
+      - .cloud/opchache.ini:/usr/php-opcache.ini:cached
+      - ./:/application:cached
+
+  nginx:
+    image: nginx
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - .cloud/nginx/nginx.conf:/etc/nginx/conf.d/default.conf:cached
+      - ./:/application:cached
+    depends_on:
+      - app-server
+    links:
+      - redis
+
+  redis:
+    image: redis
+    restart: on-failure
+    ports:
+      - "6379:6379"
