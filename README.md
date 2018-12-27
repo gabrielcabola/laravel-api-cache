@@ -1,4 +1,4 @@
-# Benchmarking Laravel Test creating a API using REDIS
+# Benchmarking Laravel test creating a API using REDIS
 Create  a API to return realtime data statistics using Redis.
 
 #### Installing Laravel
@@ -62,6 +62,7 @@ $ docker-compose up -d
   ```
 ----
 **Statistics**
+
  **URL**
   /statistics
 
