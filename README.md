@@ -102,7 +102,7 @@ $ docker-compose up -d
   
   ----
   
-  **Apache Benchmarking teste***
+  **Apache Bench test***
   
   ```sh
   ab -r -n 300  -c 30 -T 'application/json' -p post.test  http://127.0.0.1:8000/payment
