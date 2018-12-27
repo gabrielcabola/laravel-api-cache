@@ -26,7 +26,7 @@ class PaymentRepository
       {
           $this->cache = $cache;
           $this->prefix = 'paymentsStatistics';
-          $this->timeToExpire = 100; //ms
+          $this->timeToExpire = 60; //seconds
       }
 
 
