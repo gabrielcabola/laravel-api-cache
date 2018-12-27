@@ -99,3 +99,11 @@ $ docker-compose up -d
   http POST http://127.0.0.1:8000/payment \
   Content-Type:application/json
   ```
+  
+  ----
+  
+  **Apache Benchmarking teste***
+  
+  ```sh
+  ab -r -n 300  -c 30 -T 'application/json' -p post.test  http://127.0.0.1:8000/payment
+  ```
