@@ -40,7 +40,7 @@ class PaymentRepository
       public function add($payment)
       {
             //Generate a timestamp for a cache key
-            $cacheKey = Carbon::now()->timestamp;
+           $cacheKey = Carbon::now()->timestamp . Carbon::now()->micro;
             //$cacheKey = strtotime(date('Y-m-d H:i:s'));
 
             //Set Cache info with expiration
@@ -50,7 +50,7 @@ class PaymentRepository
             //We can store this information in database via job dispatch in queue system to avoid block the requests.
 
             //response
-            return ['success'=>true, $this->prefix.':'.$cacheKey => $this->cache::get($this->prefix.':'.$cacheKey)];
+            return ['success'=>true, 'key' =>  $this->cache::get($this->prefix.':'.$cacheKey)];
 
       }
 
