@@ -17,8 +17,6 @@ $ docker-compose up -d
 ```
 
 
-[http://127.0.0.1/] http://127.0.0.1/
-
 ----
 
 **Add a sale**
