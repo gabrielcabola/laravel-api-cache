@@ -47,9 +47,9 @@ class PaymentRepository
       {
             //Generate a timestamp for a cache key
             //$micro = Carbon::now()->micro;
-            $micro = microtime(true);
-            $cacheKey = Carbon::now()->timestamp . 'M'. $micro . 'R' .$micro*rand(1, 999);
-
+            //$micro = microtime(true);
+            //$cacheKey = Carbon::now()->timestamp . 'M'. $micro . 'R' .$micro*rand(1, 999);
+            $cacheKey = date('Y-m-d-H:i:s.').preg_replace("/^.*\./i","", microtime(true)) . rand(1, 999);
 
             if(! $this->cache::exists($cacheKey)) {
                \Log::debug('The key '.$cacheKey.' is already used');
