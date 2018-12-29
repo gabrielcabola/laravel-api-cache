@@ -46,7 +46,8 @@ class PaymentRepository
       public function add($payment)
       {
             //Generate a timestamp for a cache key
-            $micro = Carbon::now()->micro;
+            //$micro = Carbon::now()->micro;
+            $micro = microtime(true);
             $cacheKey = Carbon::now()->timestamp . 'M'. $micro . 'R' .$micro*rand(1, 999);
 
 
