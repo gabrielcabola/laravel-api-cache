@@ -53,7 +53,7 @@ class PaymentRepository
 
             if(! $this->cache::exists($cacheKey)) {
                \Log::debug('The key '.$cacheKey.' is already used');
-               $cacheKey = $cacheKey.rand(1, 10);
+               $cacheKey = $cacheKey.rand(1, 10).'B';
             }
 
             //Set Cache info with expiration
