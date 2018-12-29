@@ -46,7 +46,7 @@ class PaymentRepository
       public function add($payment)
       {
             //Generate a timestamp for a cache key
-            $cacheKey = Carbon::now()->timestamp . Carbon::now()->micro . rand(1, 999);
+            $cacheKey = Carbon::now()->timestamp . 'M'. Carbon::now()->micro . 'R' .rand(1, 999);
             //$cacheKey = strtotime(date('Y-m-d H:i:s'));
 
             //Set Cache info with expiration
