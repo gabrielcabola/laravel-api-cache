@@ -63,8 +63,11 @@ class PaymentRepository
 
             //response
 
-
-            return ['success'=>true, 'key' => $cacheKey];
+            if($this->cache::exists($cacheKey)) {
+              return ['success'=>true, 'key' => $cacheKey];
+            } else {
+                 \Log::debug('The key '.$cacheKey.' is not setted correct');
+            }
 
 
       }
