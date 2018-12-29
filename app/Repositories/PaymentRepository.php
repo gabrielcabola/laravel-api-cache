@@ -12,8 +12,14 @@ class PaymentRepository
        */
       protected $cache;
 
+      /**
+       * Cache Key Prefix.
+       */
       protected $prefix;
 
+      /**
+       * Minutes to Expire Cached Information.
+       */
       protected $timeToExpire;
 
       /**
@@ -40,7 +46,7 @@ class PaymentRepository
       public function add($payment)
       {
             //Generate a timestamp for a cache key
-           $cacheKey = Carbon::now()->timestamp . Carbon::now()->micro;
+            $cacheKey = Carbon::now()->timestamp . Carbon::now()->micro . rand(1, 999);
             //$cacheKey = strtotime(date('Y-m-d H:i:s'));
 
             //Set Cache info with expiration
