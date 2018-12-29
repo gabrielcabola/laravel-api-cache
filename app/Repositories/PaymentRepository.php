@@ -48,15 +48,21 @@ class PaymentRepository
             //Generate a timestamp for a cache key
             $micro = Carbon::now()->micro;
             $cacheKey = Carbon::now()->timestamp . 'M'. $micro . 'R' .$micro*rand(1, 999);
-        
+
+
+            if(! $this->cache->exists($cacheKey)) {
+               \Log::debug('The key '.$cacheKey.' is already used');
+               $cacheKey = $cacheKey.rand(1, 10);
+            }
+
             //Set Cache info with expiration
             $this->cache::setEx( $this->prefix.':'.$cacheKey, $this->timeToExpire , $payment->amount );
-
             //More...
             //We can store this information in database via job dispatch in queue system to avoid block the requests.
 
             //response
             return ['success'=>true, 'key' => $cacheKey];
+
 
       }
 
