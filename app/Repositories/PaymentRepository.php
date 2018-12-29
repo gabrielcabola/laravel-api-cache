@@ -50,7 +50,7 @@ class PaymentRepository
             $cacheKey = Carbon::now()->timestamp . 'M'. $micro . 'R' .$micro*rand(1, 999);
 
 
-            if(! $this->cache->exists($cacheKey)) {
+            if(! $this->cache->get($cacheKey)) {
                \Log::debug('The key '.$cacheKey.' is already used');
                $cacheKey = $cacheKey.rand(1, 10);
             }
