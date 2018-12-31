@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use Illuminate\Support\Facades\Redis as Cache; //Create a Interface to cache class to abstract Redis
-use Carbon\Carbon;
+
 
 class PaymentRepository
 {
@@ -46,22 +46,21 @@ class PaymentRepository
       public function add($payment)
       {
             //Generate a timestamp for a cache key
-            //$micro = Carbon::now()->micro;
             $micro = microtime(true);
-            //$cacheKey = Carbon::now()->timestamp . 'M'. $micro . 'R' .$micro*rand(1, 999);
             $cacheKey = date('Y-m-d-H:i:s.').preg_replace("/^.*\./i","", $micro) . md5(rand(999, 9999) * $micro);
 
             //Set Cache info with expiration
-            return $this->cache::setEx( $this->prefix.':'.$cacheKey, $this->timeToExpire , $payment->amount );
+            $this->cache::setEx( $this->prefix.':'.$cacheKey, $this->timeToExpire , $payment->amount );
+
             //More...
             //We can store this information in database via job dispatch in queue system to avoid block the requests.
 
             //response
-
             if($this->cache::exists($cacheKey)) {
               return ['success'=>true, 'key' => $cacheKey];
             } else {
-                 \Log::debug('The key '.$cacheKey.' is not setted correct');
+              \Log::debug('The key '.$cacheKey.' is not setted correct');
+              return ['success'=>false, 'key' => 'has a problem to set a key'];
             }
 
 

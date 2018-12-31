@@ -13,7 +13,7 @@ class BasicRequestApi extends TestCase
      *
      * @return void
      */
-    public function RouteStatisticsIsOk()
+    public function testRouteStatisticsIsOk()
     {
       $response = $this->get('/statistics');
       $response->assertStatus(200);
@@ -25,10 +25,10 @@ class BasicRequestApi extends TestCase
      *
      * @return void
      */
-    public function RoutePaymentIsOk()
+    public function testRoutePaymentIsMethodOk()
     {
-      $response = $this->post('/payment');
-      $response->assertStatus(200);
+      $response = $this->get('/payment');
+      $response->assertStatus(405);
     }
 
 
@@ -37,7 +37,7 @@ class BasicRequestApi extends TestCase
      *
      * @return void
      */
-    public function RoutePaymentValidation()
+    public function testRoutePaymentValidation()
     {
       $response = $this->post('/payment');
       $response->assertStatus(400);
@@ -50,7 +50,7 @@ class BasicRequestApi extends TestCase
      *
      * @return void
      */
-    public function RoutePostPaymentOk()
+    public function testRoutePostPaymentOk()
     {
 
       $response = $this->json('POST', '/payment', ['amount' => '5']);
